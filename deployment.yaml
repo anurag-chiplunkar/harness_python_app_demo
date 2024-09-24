@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: brainstrom/docker_harness
+        image: brainstrom/docker_harness:latest
         ports:
         - containerPort: 5000
         env:
