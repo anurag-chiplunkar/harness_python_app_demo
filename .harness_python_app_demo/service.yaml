@@ -1,0 +1,9 @@
+service:
+  name: flask_app_service
+  identifier: flask_app_service
+  serviceDefinition:
+    type: Kubernetes
+    spec: {}
+  gitOpsEnabled: true
+  orgIdentifier: default
+  projectIdentifier: harness_python
