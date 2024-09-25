@@ -15,6 +15,21 @@ service:
                 digest: ""
               identifier: docker_hub_artifacts
               type: DockerRegistry
+      manifests:
+        - manifest:
+            identifier: git_mainfest
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: github_harness
+                  gitFetchType: Branch
+                  paths:
+                    - harness_python_app_demo
+                  branch: master
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
   gitOpsEnabled: false
   orgIdentifier: default
   projectIdentifier: harness_python
