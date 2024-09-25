@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: new_infra
+  identifier: new_infra
+  orgIdentifier: default
+  projectIdentifier: harness_python
+  environmentRef: new_pre_production_env
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: minikubeconnector
+    namespace: default
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
