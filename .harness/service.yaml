@@ -1,0 +1,35 @@
+service:
+  name: flask_app_service
+  identifier: flask_app_service
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      artifacts:
+        primary:
+          primaryArtifactRef: <+input>
+          sources:
+            - spec:
+                connectorRef: docker_connector
+                imagePath: brainstrom/docker_harness
+                tag: <+input>
+                digest: ""
+              identifier: docker_hub_artifacts
+              type: DockerRegistry
+      manifests:
+        - manifest:
+            identifier: git_mainfest
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: github_harness
+                  gitFetchType: Branch
+                  paths:
+                    - harness_python_app_demo
+                  branch: master
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+  gitOpsEnabled: false
+  orgIdentifier: default
+  projectIdentifier: harness_python
