@@ -1,0 +1,37 @@
+pipeline:
+  name: demo_project_pipeline
+  identifier: demo_project_pipeline
+  projectIdentifier: demo_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: demoprojectgithub_connector_local_delegate
+        build: <+input>
+  stages:
+    - stage:
+        name: demo_project_build_stage
+        identifier: demo_project_build_stage
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Windows
+            arch: Arm64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: GitClone_1
+                  identifier: GitClone_1
+                  spec:
+                    connectorRef: demoprojectgithub_connector_local_delegate
+                    build:
+                      type: branch
+                      spec:
+                        branch: master
