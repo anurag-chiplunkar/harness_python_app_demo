@@ -18,8 +18,8 @@ pipeline:
         spec:
           cloneCodebase: true
           platform:
-            os: <+input>
-            arch: <+input>
+            os: Windows
+            arch: Arm64
           runtime:
             type: Docker
             spec: {}
