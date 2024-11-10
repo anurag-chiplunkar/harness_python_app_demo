@@ -20,7 +20,9 @@ pipeline:
                   spec:
                     connectorRef: docker_harness
                     image: brainstrom/docker_harness:latest
-                    command: python --version
+                    command: |-
+                      python --version
+                      sleep 15
                     shell: Sh
                     infrastructure:
                       type: KubernetesDirect
