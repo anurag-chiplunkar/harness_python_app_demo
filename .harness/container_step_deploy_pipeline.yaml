@@ -26,7 +26,7 @@ pipeline:
                       type: KubernetesDirect
                       spec:
                         connectorRef: local_kubernetes_minikube
-                        namespace: harness-delegate-ng
+                        namespace: default
                         resources:
                           limits:
                             cpu: "0.5"
