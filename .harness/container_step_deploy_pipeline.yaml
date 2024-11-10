@@ -1,0 +1,48 @@
+pipeline:
+  name: container_step_deploy_pipeline
+  identifier: container_step_deploy_pipeline
+  projectIdentifier: demo_project_10112024
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: deploy_flask_app
+        identifier: deploy_flask_app
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: Container
+                  name: container_step_flask_app
+                  identifier: container_step_flask_app
+                  spec:
+                    connectorRef: docker_harness
+                    image: brainstrom/docker_harness:latest
+                    command: python --version
+                    shell: Sh
+                    infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                        connectorRef: local_kubernetes_minikube
+                        namespace: harness-delegate-ng
+                        resources:
+                          limits:
+                            cpu: "0.5"
+                            memory: 500Mi
+                        annotations: {}
+                        labels: {}
+                        containerSecurityContext:
+                          capabilities:
+                            drop: []
+                            add: []
+                        nodeSelector: {}
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths: []
+                    outputVariables: []
+                    envVariables: {}
+                  timeout: 10m
+        tags: {}
