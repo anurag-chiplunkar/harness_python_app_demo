@@ -22,13 +22,14 @@ pipeline:
                     image: brainstrom/docker_harness:latest
                     command: |-
                       python --version
-                      sleep 15
+                      sleep 25
+                      echo "END"
                     shell: Sh
                     infrastructure:
                       type: KubernetesDirect
                       spec:
                         connectorRef: local_kubernetes_minikube
-                        namespace: default
+                        namespace: harness-delegate-ng
                         resources:
                           limits:
                             cpu: "0.5"
