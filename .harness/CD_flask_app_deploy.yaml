@@ -1,0 +1,51 @@
+pipeline:
+  name: CD_flask_app_deploy
+  identifier: CD_flask_app_deploy
+  projectIdentifier: demo_project_10112024
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: flask_app_deploy
+        identifier: flask_app_deploy
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: Container
+                  name: Container_1
+                  identifier: Container_1
+                  spec:
+                    connectorRef: CI_flask_app_docker_connector
+                    image: brainstrom/docker_harness:latest
+                    command: |-
+                      python --version
+                      sleep 50
+                      echo "END of the DEMO"
+                    shell: Sh
+                    infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                        connectorRef: local_kubernetes_minikube
+                        namespace: default
+                        resources:
+                          limits:
+                            cpu: "0.5"
+                            memory: 500Mi
+                        annotations: {}
+                        labels: {}
+                        containerSecurityContext:
+                          capabilities:
+                            drop: []
+                            add: []
+                        nodeSelector: {}
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths: []
+                    outputVariables: []
+                    envVariables: {}
+                  timeout: 10m
+        tags: {}
